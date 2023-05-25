@@ -11,32 +11,28 @@ let inputBox = document.querySelector(".input")
 let resultBox = document.querySelector(".resultBox")
 
 inputBox.onkeyup = (e) => {
-  titles.forEach((title) => {
-    let inputUser = e.target.value
-    let resultArray = []
+  let inputUser = e.target.value
+  let resultArray = []
 
-    if (inputUser.length > 0) {
-      resultArray = titles.filter((title) => {
-        if (title.startsWith(inputUser)) {
-          return title
-        }
-      })
-
-      resultArray = resultArray.map((title) => {
-        return `<li>${title}</li>`
-      })
-
-      if (resultArray.length > 0) {
-       resultBox.innerHTML = resultArray.join(" ")
-
-      search.classList.add("active") 
-      }else{
-        search.classList.remove("active") 
+  if (inputUser.length > 0) {
+    resultArray = titles.filter((title) => {
+      if (title.startsWith(inputUser)) {
+        return title
       }
+    })
 
-      
-    }else{
-      search.classList.remove("active") 
+    resultArray = resultArray.map((title) => {
+      return `<li><b>${inputUser}</b>${title.substring(inputUser.length)}</li>`
+    })
+
+    if (resultArray.length > 0) {
+      resultBox.innerHTML = resultArray.join(" ")
+
+      search.classList.add("active")
+    } else {
+      search.classList.remove("active")
     }
-  })
+  } else {
+    search.classList.remove("active")
+  }
 }
